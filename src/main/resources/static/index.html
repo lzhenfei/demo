@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+<script
+	src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+	$(document).ready(function() {
+		$("button").click(function() {
+			$.getJSON("http://localhost:8080/user/getUser", function(user) {
+				alert("数据: " + user );
+				var obj = user;
+				var len=eval(obj).length;
+				var html = '<table class="table table-hover"><tr><th>Month</th><th>Savings</th></tr>';
+				for(var i=0;i<len;i++){
+					html += '<tr>';
+			        html += '<td>' + obj[i].name + '</td>';
+			        html += '<td>' + obj[i].password + '</td>';
+			        html += '</tr>';
+			    	//document.write(html)
+				}
+				html+='</table>';
+			        $("div").replaceWith(html);
+			        html='';
+			    
+			    //table.innerHTML = html;
+				//document.getElementById("table").innerHTML = html;
+			});
+		});
+	});
+</script>
+</head>
+<body>
+	
+	<button class="btn btn-primary" type="button">查询</button>
+	<div></div>
+	
+</body>
+</html>
